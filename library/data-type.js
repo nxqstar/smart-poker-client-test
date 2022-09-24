@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BinaryDataType = void 0;
+var BinaryDataType;
+(function (BinaryDataType) {
+    BinaryDataType[BinaryDataType["INT8"] = 0] = "INT8";
+    BinaryDataType[BinaryDataType["INT16"] = 1] = "INT16";
+    BinaryDataType[BinaryDataType["INT32"] = 2] = "INT32";
+    BinaryDataType[BinaryDataType["INT64"] = 3] = "INT64";
+    BinaryDataType[BinaryDataType["UINT8"] = 4] = "UINT8";
+    BinaryDataType[BinaryDataType["UINT16"] = 5] = "UINT16";
+    BinaryDataType[BinaryDataType["UINT32"] = 6] = "UINT32";
+    BinaryDataType[BinaryDataType["UINT64"] = 7] = "UINT64";
+    BinaryDataType[BinaryDataType["FLOAT"] = 8] = "FLOAT";
+    BinaryDataType[BinaryDataType["DOUBLE"] = 9] = "DOUBLE";
+    BinaryDataType[BinaryDataType["STRING"] = 10] = "STRING";
+    BinaryDataType[BinaryDataType["OBJECT"] = 11] = "OBJECT";
+    BinaryDataType[BinaryDataType["ARRAY"] = 12] = "ARRAY";
+    BinaryDataType[BinaryDataType["OBJECT_ARRAY"] = 13] = "OBJECT_ARRAY";
+})(BinaryDataType = exports.BinaryDataType || (exports.BinaryDataType = {}));
