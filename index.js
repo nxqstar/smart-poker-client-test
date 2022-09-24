@@ -61,7 +61,6 @@ onLoggedIn = async (params) => {
     // const msg = await eccrypto.encrypt(serverPublicKey, Buffer.from(JSON.stringify(testData)));
     const msg = await eccrypto.encrypt(serverPublicKey, Buffer.from('abc'));
     // const msg = eccrypto.encrypt(serverPublicKey, Buffer.from(testData));
-    console.log('msg', msg);
     sendToServer({ cmd: 0, params: { msg } });
 };
 
@@ -81,5 +80,3 @@ ws.on('message', function (msg, flags) {
         console.log('params', params);
     }
 });
-
-const ecdsa = require('ecdsa');
