@@ -22,7 +22,8 @@ var publicKeyB = eccrypto.getPublic(privateKeyB);
 // });
 
 const testfunc = async () => {
-    const msg = await eccrypto.encrypt(publicKeyA, Buffer.from("msg to a"));
+    const obj = {a: 1};
+    const msg = await eccrypto.encrypt(publicKeyA, Buffer.from(JSON.stringify(obj)));
     const data = await eccrypto.decrypt(privateKeyA, msg);
     console.log('publicKeyA', publicKeyA);
     console.log('msg', msg);

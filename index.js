@@ -50,31 +50,52 @@ parseRequest = (msg) => {
 
 onLoggedIn = async (params) => {
     const { data } = params;
+    console.log('params', params);
     // var serverPublicKey = Buffer.from(JSON.stringify(buffer));
-    serverPublicKey = Buffer.from(data.publicKey);
+
 
     const testData = {
         name: 'quideptrai',
         gold: 1234576,
     };
-    console.log('serverPublicKey', serverPublicKey, serverPublicKey.length);
-    // const msg = await eccrypto.encrypt(serverPublicKey, Buffer.from(JSON.stringify(testData)));
-    const msg = await eccrypto.encrypt(serverPublicKey, Buffer.from('abc'));
-    // const msg = eccrypto.encrypt(serverPublicKey, Buffer.from(testData));
+
+    serverPublicKey = Buffer.from(data.publicKey, 'hex');
+    // serverPublicKey = Buffer.from(hexa, 'hex');
+    const msg = await eccrypto.encrypt(serverPublicKey, Buffer.from(JSON.stringify(testData)));
     sendToServer({ cmd: 0, params: { msg } });
+};
+
+onTest = async (params) => {
+    const { data } = params;
+    const { msg } = data;
+
+    if (msg == undefined) {
+        console.log('error');
+        return;
+    }
+    for (const key in msg) {
+        msg[key] = Buffer.from(msg[key]);
+    }
+    console.log('params', params);
+    const buffer = await eccrypto.decrypt(privateKey, msg);
+    const str = buffer.toString();
+    const obj = JSON.parse(str);
+    console.log('data', obj);
 };
 
 ws.on('open', function () {
     login();
 });
 ws.on('message', function (msg, flags) {
+    // const data = JSON.parse(msg);
+    // console.log('data', data);
     const str = msg.toString();
     const parse = JSON.parse(str);
     const { cmd, params } = parse;
     if (cmd === 1) {
         onLoggedIn(params);
-    } else if(cmd === 0){
-        console.log('test', params);
+    } else if (cmd === 0) {
+        onTest(params);
     } else {
         console.log('cmd', cmd);
         console.log('params', params);
